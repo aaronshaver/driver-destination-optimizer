@@ -14,7 +14,7 @@ as when the app was developed. Download here: https://www.docker.com/get-started
 
 1. `docker container run -it optimizer /bin/bash`
 1. Run unit tests: `python3 -m unittest discover .`
-1. Run application: `python3 application.py sample_destinations.txt sample_drivers.txt`
+1. Run application: `python3 application.py sample_drivers.txt sample_destinations.txt`
 
 ## Design considerations
 
@@ -24,6 +24,13 @@ it works fine for small projects too. I could have done Java just as easily and
 maybe it would have been nice to do Stream API stuff where Suitability could
 have been a small block of .filter()s and .map()s and we could use
 .parallelStream() for high performance but maybe overkill for a small project.
+* Exercise document said "You do not need to worry about malformed input" so I
+didn't bother with a lot of error handling, but normally I'd enumerate all the
+error conditions I could think of -- empty files, check for Driver and
+Destination being well-formed (i.e. don't trust inputs) and check for zero
+lengths or names that don't have vowels or consonants, etc. -- and return nice
+error messages to the user (or have logic to skip malformed entities and move
+on with partial data)
 * In reality, address verification is a difficult problem and kind of a science
 unto itself. I didn't bother building a complex object for addresses, just did a
 tiny simulation of extracting a street name from an address in
