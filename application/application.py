@@ -21,33 +21,34 @@ def ingest_drivers(path):
     return drivers
 
 def construct_driver_destinations(drivers, destinations):
-    driver_destinations = []
+    output = []
     for driver in drivers:
         for destination in destinations:
             driver_destination = DriverDestination(driver, destination)
-            driver_destinations.append(driver_destination)
-    driver_destinations.sort(key=lambda x: x.suitability, reverse=True)
-    return driver_destinations
+            output.append(driver_destination)
+    output.sort(key=lambda x: x.suitability, reverse=True)
+    return output
+
+def get_highest_suitability_pairs(driver_destinations):
+    output = []
+    for driver_destination in driver_destinations:
+        # if both driver and destination are still available, we can pair them and
+        # then remove them both from future consideration
+        if driver_destination.driver in drivers and driver_destination.destination \
+            in destinations:
+            drivers.remove(driver_destination.driver)
+            destinations.remove(driver_destination.destination)
+            output.append(driver_destination)
+    return output
 
 drivers_path = sys.argv[1]
 destinations_path = sys.argv[2]
-
 drivers = ingest_drivers(drivers_path)
 destinations = ingest_destinations(destinations_path)
 
 driver_destinations = construct_driver_destinations(drivers, destinations)
-
-total_suitability = 0
-highest_suitability_pairs = []
-for driver_destination in driver_destinations:
-    # if both driver and destination are still available, we can pair them and
-    # then remove them both from future consideration
-    if driver_destination.driver in drivers and driver_destination.destination \
-        in destinations:
-        drivers.remove(driver_destination.driver)
-        destinations.remove(driver_destination.destination)
-        total_suitability += driver_destination.suitability
-        highest_suitability_pairs.append(driver_destination)
+highest_suitability_pairs = get_highest_suitability_pairs(driver_destinations)
+total_suitability = sum([x.suitability for x in highest_suitability_pairs])
 
 print("Total suitability:", total_suitability)
 for driver_destination in highest_suitability_pairs:
