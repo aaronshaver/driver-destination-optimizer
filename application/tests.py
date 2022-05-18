@@ -10,8 +10,6 @@ class Tests(unittest.TestCase):
         subdir = './test_resources/'
         self.one_destination_path = subdir + 'one_destination.txt'
 
-        return super().setUp()
-
     # file system tests
     def test_basic_deserialization(self):
         lines = FileSystem.get_lines(self.one_destination_path)

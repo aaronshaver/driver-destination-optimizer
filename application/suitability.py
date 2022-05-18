@@ -13,7 +13,7 @@ class Suitability:
         for i in range(1, int(number ** 0.5) + 1):
             if number % i == 0:
                 all_factors.append([i, number // i])
-            # list comprehension flattens list
+        # list comprehension flattens list
         factors = set([factor for sublist in all_factors for factor in sublist])
         factors.remove(1)  # remove undesired 1 factor
 
