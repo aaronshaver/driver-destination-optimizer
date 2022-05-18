@@ -5,6 +5,7 @@ from suitability import Suitability
 from driver import Driver
 from driver_destination import DriverDestination
 
+
 class AllTests(unittest.TestCase):
 
     # setup
@@ -13,7 +14,10 @@ class AllTests(unittest.TestCase):
         self.one_destination_path = subdir + 'one_destination.txt'
         self.one_driver_path = subdir + 'one_driver.txt'
         self.even_destination_path = subdir + 'even_street_name.txt'
+        self.odd_destination_path = subdir + 'odd_street_name.txt'
         self.factor_5_driver_path = subdir + 'factor_5_driver.txt'
+        self.factor_16_driver_path = subdir + 'factor_16_driver.txt'
+        self.factor_14_driver_path = subdir + 'factor_14_driver.txt'
 
     # file system tests
     def test_basic_deserialization(self):
@@ -77,15 +81,15 @@ class AllTests(unittest.TestCase):
         driver = Driver(lines[0])
         self.assertEqual({13}, driver.factors)
 
-    #DriverDestination tests
+    # DriverDestination tests
     def test_driverdestination_has_driver_destination_objects(self):
         lines = FileSystem.get_lines(self.one_driver_path)
         driver = Driver(lines[0])
         lines2 = FileSystem.get_lines(self.one_destination_path)
         destination = Destination(lines2[0])
         driver_destination = DriverDestination(driver, destination)
-        self.assertEquals('Jill Kawasaki', driver_destination.driver.name)
-        self.assertEquals(
+        self.assertEqual('Jill Kawasaki', driver_destination.driver.name)
+        self.assertEqual(
             'Ridgemark',
             driver_destination.destination.street_name
         )
@@ -96,7 +100,31 @@ class AllTests(unittest.TestCase):
         lines2 = FileSystem.get_lines(self.even_destination_path)
         destination = Destination(lines2[0])
         driver_destination = DriverDestination(driver, destination)
-        self.assertEquals(3, driver_destination.suitability)
+        self.assertEqual(3, driver_destination.suitability)
+
+    def test_driverdestination_odd_no_factors(self):
+        lines = FileSystem.get_lines(self.factor_5_driver_path)
+        driver = Driver(lines[0])
+        lines2 = FileSystem.get_lines(self.odd_destination_path)
+        destination = Destination(lines2[0])
+        driver_destination = DriverDestination(driver, destination)
+        self.assertEqual(2, driver_destination.suitability)
+
+    def test_driverdestination_even_yes_factors(self):
+        lines = FileSystem.get_lines(self.factor_16_driver_path)
+        driver = Driver(lines[0])
+        lines2 = FileSystem.get_lines(self.even_destination_path)
+        destination = Destination(lines2[0])
+        driver_destination = DriverDestination(driver, destination)
+        self.assertEqual(11.25, driver_destination.suitability)
+
+    def test_driverdestination_odd_yes_factors(self):
+        lines = FileSystem.get_lines(self.factor_14_driver_path)
+        driver = Driver(lines[0])
+        lines2 = FileSystem.get_lines(self.odd_destination_path)
+        destination = Destination(lines2[0])
+        driver_destination = DriverDestination(driver, destination)
+        self.assertEqual(10.5, driver_destination.suitability)
 
     # Suitability tests
     def test_get_factors_returns_correct_factors24(self):

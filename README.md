@@ -68,3 +68,8 @@ functionality, e.g. Driver and Destination lengths, factors. You could do
 something like have an Entity base class and inherit from that, but it feels
 over-engineered. I try to follow "Rule of three" when refactoring and there just
 isn't enough benefit in this case IMO.
+* Stuff like 1.5 for even + vowels suitability should probably be configurable
+in a settings file, but I wasn't sure the exercise called for that level of
+customization so I kept it simple
+* I tried to use static classes and methods where possible to reduce the amount
+of `object = Object(); object.doStuff()` repetitive fluff
