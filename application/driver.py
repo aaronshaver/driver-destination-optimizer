@@ -13,4 +13,5 @@ class Driver:
         self.name = raw_driver
         self.name_length = len(self.name)
         self.vowel_count = Suitability.get_vowel_count(self.name)
-
+        self.driver_name_length = len(self.name)
+        self.factors = Suitability.get_factors(self.driver_name_length)

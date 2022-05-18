@@ -3,6 +3,7 @@ from file_system import FileSystem
 from destination import Destination
 from suitability import Suitability
 from driver import Driver
+from driver_destination import DriverDestination
 
 class AllTests(unittest.TestCase):
 
@@ -52,7 +53,7 @@ class AllTests(unittest.TestCase):
     def test_deserialize_driver_has_name(self):
         lines = FileSystem.get_lines(self.one_driver_path)
         driver = Driver(lines[0])
-        self.assertEqual('Jill Kawazaki', driver.name)
+        self.assertEqual('Jill Kawasaki', driver.name)
 
     def test_deserialize_driver_has_name_length(self):
         lines = FileSystem.get_lines(self.one_driver_path)
@@ -64,16 +65,44 @@ class AllTests(unittest.TestCase):
         driver = Driver(lines[0])
         self.assertEqual(5, driver.vowel_count)
 
+    def test_deserialize_driver_has_driver_name_length(self):
+        lines = FileSystem.get_lines(self.one_driver_path)
+        driver = Driver(lines[0])
+        self.assertEqual(13, driver.driver_name_length)
+
+    def test_deserialize_driver_has_correct_factors(self):
+        lines = FileSystem.get_lines(self.one_driver_path)
+        driver = Driver(lines[0])
+        self.assertEqual({13}, driver.factors)
+
+    #DriverDestination tests
+    def test_driverdestination_has_driver_destinatino_objects(self):
+        lines = FileSystem.get_lines(self.one_driver_path)
+        driver = Driver(lines[0])
+        lines2 = FileSystem.get_lines(self.one_destination_path)
+        destination = Destination(lines2[0])
+        driver_destination = DriverDestination(driver, destination)
+        self.assertEquals('Jill Kawasaki', driver_destination.driver.name)
+        self.assertEquals(
+            'Ridgemark',
+            driver_destination.destination.street_name
+        )
+
     # Suitability tests
-    def test_get_factors_returns_correct_factors(self):
+    def test_get_factors_returns_correct_factors24(self):
         number = 24
         factors = Suitability.get_factors(number)
         self.assertEqual({2, 3, 4, 6, 8, 12, 24}, factors)
 
+    def test_get_factors_returns_correct_factors7(self):
+        number = 7
+        factors = Suitability.get_factors(number)
+        self.assertEqual({7}, factors)
+
     def test_vowel_count(self):
-        name = 'Jill Kawazaki'
+        name = 'Jill Kawasaki'
         self.assertEqual(5, Suitability.get_vowel_count(name))
 
     def test_consonant_count(self):
-        name = 'Jill Kawazaki'
+        name = 'Jill Kawasaki'
         self.assertEqual(7, Suitability.get_consonant_count(name))
