@@ -16,6 +16,10 @@ as when the app was developed. Download here: https://www.docker.com/get-started
 1. Run unit tests: `python3 -m unittest discover .`
 1. Run application: `python3 application.py sample_drivers.txt sample_destinations.txt`
 
+(NOTE: order matters! Since we're not dealing with statically typed objects
+(Drivers and Destinations are really just strings), you can input Drivers as
+Destinations or vice-versa and get output, but it'll be wrong)
+
 ## Design considerations
 
 * I chose Python because it's the language I typically use for live DS/A code
@@ -31,6 +35,10 @@ Destination being well-formed (i.e. don't trust inputs) and check for zero
 lengths or names that don't have vowels or consonants, etc. -- and return nice
 error messages to the user (or have logic to skip malformed entities and move
 on with partial data)
+* Exercise didn't strongly specify output format, so just for fun, I made the
+output be in valid CSV format, and include the suitability of individual
+driver-destination pairings; this had a nice side benefit of being able to
+quickly see if they added up to the correct total
 * In reality, address verification is a difficult problem and kind of a science
 unto itself. I didn't bother building a complex object for addresses, just did a
 tiny simulation of extracting a street name from an address in

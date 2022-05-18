@@ -50,9 +50,11 @@ driver_destinations = construct_driver_destinations(drivers, destinations)
 highest_suitability_pairs = get_highest_suitability_pairs(driver_destinations)
 total_suitability = sum([x.suitability for x in highest_suitability_pairs])
 
-print("Total suitability:", total_suitability)
+print("\nTotal suitability: {}\n".format(total_suitability))
+print("\"driver\",\"destination\",\"suitability\"")
 for driver_destination in highest_suitability_pairs:
-    print("{} : {}".format(
+    print("\"{}\",\"{}\",\"{}\"".format(
+        driver_destination.driver.name,
         driver_destination.destination.address,
-        driver_destination.driver.name
+        driver_destination.suitability
     ))
