@@ -1,7 +1,7 @@
 # driver-destination-optimizer
 
-Finds destination + driver combinations (pairs), optimizing for highest total
-suitability while never using a driver or destination more than once
+Constructs driver + destination combinations (pairs), then optimizes for highest
+total suitability, while never using a driver or destination more than once
 
 ## Installation
 
