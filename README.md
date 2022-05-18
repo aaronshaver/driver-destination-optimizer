@@ -18,3 +18,12 @@ as when the app was developed. Download here: https://www.docker.com/get-started
 
 ## Design considerations
 
+* In reality, address verification is a difficult problem and kind of a science
+unto itself. I didn't bother building a complex object for addresses, just did a
+tiny simulation of extracting a street name from an address in
+Destination.get_street_name() to hint at the complexity involved.
+* I thought about abstracting "street name" into its own class but it felt like
+over-engineering. If we expected to do much more complex logic with it, an
+argument could be made and refactoring done in the future.
+
+
