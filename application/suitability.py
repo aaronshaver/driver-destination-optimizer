@@ -1,6 +1,8 @@
 class Suitability:
     """Computes suitability for destination + driver combinations"""
 
+    vowels = {'a', 'e', 'i', 'o', 'u'}
+
     def get_factors(number):
         """
         -Returns all factors of a number except 1
@@ -18,3 +20,12 @@ class Suitability:
         factors.remove(1)  # remove undesired 1 factor
 
         return factors
+
+    def get_vowel_count(name):
+        """Returns integer of count of number of vowels in string"""
+        return len([x for x in name if x in Suitability.vowels])
+
+    def get_consonant_count(name):
+        """Returns integer of count of number of vowels in string"""
+        name_no_spaces = name.replace(' ', '')
+        return len([x for x in name_no_spaces if x not in Suitability.vowels])

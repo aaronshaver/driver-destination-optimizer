@@ -5,12 +5,12 @@ class Destination():
     -Constructor and helpers to deserialize a string into a Destination object
     -Properties are pre-computed to aid in code readability further down the
     pipeline, and essentially cache results (e.g. don't re-compute factors every
-    time the object is used by the Suitability engine)
+    time the object is used by Suitability calculator methods)
     """
 
-    def __init__(self, serialized_destination):
+    def __init__(self, raw_destination):
         """Takes in raw string, builds Destination object"""
-        self.address = serialized_destination
+        self.address = raw_destination
         self.street_name = self.get_street_name(self.address)
         self.street_name_length = len(self.street_name)
         self.is_even = self.get_is_even(self.street_name_length)
