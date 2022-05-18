@@ -73,3 +73,13 @@ in a settings file, but I wasn't sure the exercise called for that level of
 customization so I kept it simple
 * I tried to use static classes and methods where possible to reduce the amount
 of `object = Object(); object.doStuff()` repetitive fluff
+* Time complexity would seem to be O(N*M) where N is number of destinations and
+M is number of drivers. I keeping there must be a way to improve on this.
+Obviously even street name Destinations will tend to be more valuable, but you
+could just as easily get an odd Destination that just so happened to pair with
+a Driver with lots of consonants and/or that plus common factors. If this were
+a large scale data set and for some reason realtime speed were of the essence,
+you could do a kind of statistical sampling of the Desintations and Drivers to
+get a "good enough" approximiation of best suitability, sorting even
+Destinations, high vowel counts, and high consonant counts toward the top of the
+heap. I might be missing something obvious.

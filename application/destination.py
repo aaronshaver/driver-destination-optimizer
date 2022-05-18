@@ -10,7 +10,7 @@ class Destination():
 
     def __init__(self, raw_destination):
         """Takes in raw string, builds Destination object"""
-        self.address = raw_destination
+        self.address = raw_destination.strip()  # remove carriage returns
         self.street_name = self.get_street_name(self.address)
         self.street_name_length = len(self.street_name)
         self.is_even = self.get_is_even(self.street_name_length)

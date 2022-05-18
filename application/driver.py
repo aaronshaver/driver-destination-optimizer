@@ -10,7 +10,7 @@ class Driver:
     """
 
     def __init__(self, raw_driver):
-        self.name = raw_driver
+        self.name = raw_driver.strip()  # remove carriage returns
         self.name_length = len(self.name)
         self.vowel_count = Suitability.get_vowel_count(self.name)
         self.consonant_count = Suitability.get_consonant_count(self.name)
