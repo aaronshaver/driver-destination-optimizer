@@ -45,7 +45,7 @@ class AllTests(unittest.TestCase):
         destination = Destination(lines[0])
         self.assertEqual(9, destination.street_name_length)
 
-    def test_deserialize_destination_has_street_name_length(self):
+    def test_deserialize_destination_has_is_even(self):
         lines = FileSystem.get_lines(self.one_destination_path)
         destination = Destination(lines[0])
         self.assertEqual(False, destination.is_even)
