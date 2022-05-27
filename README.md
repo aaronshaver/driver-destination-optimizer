@@ -69,7 +69,7 @@ would be fine.
 the pipeline to segment Destination+Driver bundles by geography or other factors
 (source company, trucks' ability to handle certain size loads, etc.). And then
 you'd reduce processing time because you'd have different clusters of workers,
-e.g. cluster for just "Oregon and Washington standardize size trucks". I'm
+e.g. cluster for just "Oregon and Washington standard-size trucks". I'm
 making some of this up, since I don't know the industry. You'd want to work
 closely with customer + PM to assess where logical divisions are in the business
 and thus where you could logically divide up your architecture.
@@ -83,8 +83,8 @@ in a settings file, but I wasn't sure the exercise called for that level of
 customization so I kept it simple
 * I tried to use static classes and methods where possible to reduce the amount
 of `object = Object(); object.doStuff()` repetitive fluff
-* Time complexity would seem to be O(N*M) where N is number of destinations and
-M is number of drivers. I keep thinking there must be a way to improve on this.
+* Time complexity would seem to be O(n*m) where n is number of destinations and
+m is number of drivers. I keep thinking there must be a way to improve on this.
 Obviously even street name Destinations will tend to be more valuable, but you
 could just as easily get an odd Destination that just so happened to pair with
 a Driver with lots of consonants and/or that plus common factors. If this were
