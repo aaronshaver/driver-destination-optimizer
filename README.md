@@ -17,8 +17,8 @@ as when the app was developed. Download here: https://www.docker.com/get-started
 1. Run unit tests: `python3 -m unittest discover .`
 1. Run application: `python3 application.py sample_drivers.txt sample_destinations.txt`
 
-(NOTE: argument order matters! Since we're not dealing with statically typed objects
-(Drivers and Destinations are really just strings), you can input Drivers as
+(NOTE: argument order matters! Since we're not dealing with normalized and typed objects
+(Drivers and Destinations are really just string blobs), you can input Drivers as
 Destinations or vice-versa and get output, but it'll be wrong)
 
 ## Design considerations
@@ -57,7 +57,7 @@ gather that into a set of Destinations and Drivers on the other side. Likewise,
 Suitability calculations could easily be map-reduced: simply partition on
 Destination (or Driver, doesn't matter, it's commutative) and then feed a worker
 with a bundle of Destination + all drivers (or further map into Destination +
-Driver "sub-bundles", e.g. Destination1 + Drivers A,B,C on instance,
+Driver "sub-bundles", e.g. Destination1 + Drivers A,B,C on one instance/worker,
 Destination1 + Drivers D,E,F on another, etc.).
 * Above scaling architecture assumes a sort of ETL / batch design, like if we
 get Destinations and Drivers only a few times a day. If we're receiving them on
