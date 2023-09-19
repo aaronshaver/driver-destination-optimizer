@@ -84,7 +84,7 @@ customization so I kept it simple
 * I tried to use static classes and methods where possible to reduce the amount
 of `object = Object(); object.doStuff()` repetitive fluff
 * Time complexity would seem to be O(n*m) where n is number of destinations and
-m is number of drivers. [Edit: this was incorrect: the naive algorithm is O(n!); the correct way to optimize down from there is to use the Hungarian algorithm (AKA Munkres assignment algorithm) which leads to a worse case of O(n^3)] I keep thinking there must be a way to improve on this.
+m is number of drivers. [Edit: this was incorrect: the naive algorithm is O(n!); the correct way to optimize down from there is to use the Hungarian algorithm (AKA Munkres assignment algorithm) which leads to a worst case of O(n^3).] I keep thinking there must be a way to improve on this.
 Obviously even street name Destinations will tend to be more valuable, but you
 could just as easily get an odd Destination that just so happened to pair with
 a Driver with lots of consonants and/or that plus common factors. If this were
